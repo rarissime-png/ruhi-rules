@@ -1,0 +1,46 @@
+backend:
+  name: github
+  repo: rarissime-png/ruhi-rules
+  branch: main
+media_folder: images/uploads
+public_folder: /images/uploads
+publish_mode: editorial_workflow
+collections:
+  - name: posts
+    label: Writing
+    folder: content/posts
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Date, name: date, widget: datetime}
+      - {label: Category, name: category, widget: select, options: [Poem, Reflection, Short prose, Creative writing]}
+      - {label: Tags, name: tags, widget: list, required: false}
+      - {label: Text, name: body, widget: markdown}
+  - name: books
+    label: Books
+    folder: content/books
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Cover, name: cover, widget: image, required: false}
+      - {label: Description, name: description, widget: text}
+      - {label: Price (for example GHS 50 or USD 5), name: price, widget: string}
+      - {label: Buy link (Selar or other checkout page), name: buy_link, widget: string, required: false}
+      - {label: International buy link (Payhip or Gumroad, optional), name: intl_link, widget: string, required: false}
+      - {label: Status, name: status, widget: select, options: [Available, Upcoming]}
+  - name: settings
+    label: Site settings
+    files:
+      - label: Quotes and payment info
+        name: settings
+        file: content/settings.json
+        format: json
+        fields:
+          - {label: Thoughts to take with you, name: thoughts, widget: list, field: {label: Thought, name: t, widget: string}}
+          - {label: Note shown under the books, name: payment_note, widget: text}
