@@ -71,7 +71,12 @@
     "phone": "+31 6 18849148",
     "whatsapp": "31618849148"
   },
-  "socials": [],
+  "socials": [
+    {
+      "name": "Ruhi Rules ",
+      "url": "https://www.instagram.com/_ruhi_rules?mdxt=N2ZmNGtwcnQ3M3cz&utm_source=qr"
+    }
+  ],
   "seo": {
     "title": "Ruhi Rules | Poetry, E-books and Digital Services",
     "description": "Ruhi Rules is a creative and professional brand: poetry and writing, poetry e-books, and digital services including social media, web design, virtual assistance and marketing."
