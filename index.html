@@ -51,6 +51,7 @@ nav ul a{text-decoration:none}nav ul a:hover{color:var(--wine)}
 .entry{border-top:1px solid var(--wine);padding:22px 0}
 .entry small{color:var(--wine);font-weight:600}
 .entry h3{font-size:1.6rem;margin:6px 0}
+.full p{margin-bottom:14px}.entry .btn{margin-top:12px;padding:10px 20px}
 .shelf{background:var(--pink-l)}
 .books{display:flex;gap:32px;flex-wrap:wrap;margin-top:36px}
 .book{width:200px}
@@ -90,7 +91,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <div class="thought"><div class="wrap"><h2>A thought to take with you</h2><q id="thought"></q></div></div>
 
 <section id="writing"><div class="wrap read">
-<div><h2>The Writing Room</h2><p>Poems, reflections and short prose. Each piece will get its own quiet reading page.</p></div>
+<div><h2>The Writing Room</h2><p>Poems, reflections and short prose. Tap Read the full piece to open any of them.</p></div>
 <div>
 <div id="posts"><p>New writing is on its way.</p></div>
 </div></div></section>
@@ -151,7 +152,7 @@ const th=document.getElementById('thought');th.textContent=t[Math.floor(Math.ran
 const E=x=>String(x||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 fetch('/data.json').then(r=>r.json()).then(d=>{
 if(d.thoughts&&d.thoughts.length){const x=d.thoughts[Math.floor(Math.random()*d.thoughts.length)];th.textContent=x.t||x;}
-if(d.posts.length)document.getElementById('posts').innerHTML=d.posts.map(p=>'<div class="entry"><small>'+E(p.category)+'</small><h3><a href="/writing/'+p.slug+'/" style="text-decoration:none">'+E(p.title)+'</a></h3><p>'+E(p.excerpt)+'...</p></div>').join('');
+if(d.posts.length){const P=document.getElementById('posts');P.innerHTML=d.posts.map((p,n)=>'<div class="entry"><small>'+E(p.category)+'</small><h3>'+E(p.title)+'</h3><p class="prev">'+E(p.excerpt)+'...</p><div class="full" hidden>'+p.html+'</div><button class="btn alt" data-n="'+n+'" type="button">Read the full piece</button> <a class="btn alt" href="/writing/'+p.slug+'/">Open as a page</a></div>').join('');P.querySelectorAll('button[data-n]').forEach(b=>b.onclick=()=>{const w=b.parentNode,f=w.querySelector('.full'),pr=w.querySelector('.prev'),o=f.hidden;f.hidden=!o;pr.hidden=o;b.textContent=o?'Show less':'Read the full piece';});}
 if(d.books.length)document.getElementById('books').innerHTML=d.books.map(b=>'<div class="book">'+(b.cover?'<img src="'+E(b.cover)+'" alt="Cover of '+E(b.title)+'" style="width:100%;box-shadow:10px 10px 0 #f7d6de">':'<div class="cover"><b>'+E(b.title)+'</b><i>Ruhi Rules</i></div>')+'<p><b>'+E(b.title)+'</b><br>'+E(b.description)+'<br>'+E(b.price)+'</p>'+(b.status==='Upcoming'?'<p><i>Upcoming</i></p>':(b.buy_link?'<a class="btn" href="'+E(b.buy_link)+'" target="_blank" rel="noopener">Buy now (MoMo or card)</a>':'<a class="btn" href="https://wa.me/31618849148?text='+encodeURIComponent('Hello, I would like to buy: '+b.title)+'">Buy via WhatsApp</a>')+(b.intl_link?' <a class="btn alt" href="'+E(b.intl_link)+'" target="_blank" rel="noopener">Pay in USD or EUR</a>':''))+'</div>').join('');
 document.getElementById('paynote').textContent=d.payment_note||'';
 }).catch(()=>{});
