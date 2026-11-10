@@ -4,7 +4,6 @@ backend:
   branch: main
 media_folder: images/uploads
 public_folder: /images/uploads
-publish_mode: editorial_workflow
 collections:
   - name: posts
     label: Writing
@@ -35,12 +34,66 @@ collections:
       - {label: International buy link (Payhip or Gumroad, optional), name: intl_link, widget: string, required: false}
       - {label: Status, name: status, widget: select, options: [Available, Upcoming]}
   - name: settings
-    label: Site settings
+    label: Website content
     files:
-      - label: Quotes and payment info
+      - label: All website text, About, services and contact
         name: settings
         file: content/settings.json
         format: json
         fields:
-          - {label: Thoughts to take with you, name: thoughts, widget: list, field: {label: Thought, name: t, widget: string}}
-          - {label: Note shown under the books, name: payment_note, widget: text}
+          - {label: About Ruhi Rules biography, name: about, widget: text, required: false}
+          - label: Home page text
+            name: home
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Opening line (I write. I create...), name: hero_tag, widget: string, required: false}
+              - {label: Big title first word, name: hero_first, widget: string, required: false}
+              - {label: Big title second word, name: hero_second, widget: string, required: false}
+              - {label: Introduction paragraph, name: hero_lead, widget: text, required: false}
+              - {label: Writing section title, name: writing_title, widget: string, required: false}
+              - {label: Writing section intro, name: writing_intro, widget: text, required: false}
+              - {label: Bookshelf title, name: shelf_title, widget: string, required: false}
+              - {label: Bookshelf intro, name: shelf_intro, widget: text, required: false}
+              - {label: Footer line, name: footer_tagline, widget: string, required: false}
+          - label: Services
+            name: services
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Section title, name: title, widget: string, required: false}
+              - {label: Section intro, name: intro, widget: text, required: false}
+              - label: Your services (add, edit or remove)
+                name: items
+                widget: list
+                required: false
+                fields:
+                  - {label: Service name, name: title, widget: string}
+                  - {label: What it includes, name: points, widget: list, required: false}
+                  - {label: Email subject for the Enquire button, name: subject, widget: string, required: false}
+          - label: Contact details
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Heading, name: title, widget: string, required: false}
+              - {label: Intro sentence, name: intro, widget: text, required: false}
+              - {label: Email address, name: email, widget: string, required: false}
+              - {label: Phone shown on the site, name: phone, widget: string, required: false}
+              - {label: WhatsApp number (digits only, with country code), name: whatsapp, widget: string, required: false}
+          - label: Social media links (add as many as you like)
+            name: socials
+            widget: list
+            required: false
+            fields:
+              - {label: Name (Instagram, TikTok...), name: name, widget: string}
+              - {label: Full link, name: url, widget: string}
+          - label: Google search text
+            name: seo
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Page title, name: title, widget: string, required: false}
+              - {label: Short description, name: description, widget: text, required: false}
+          - {label: Thoughts to take with you, name: thoughts, widget: list, required: false}
+          - {label: Note shown under the books, name: payment_note, widget: text, required: false}
