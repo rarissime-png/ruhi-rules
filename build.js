@@ -1,4 +1,4 @@
-// Runs on Netlify at every deploy: turns CMS content into data.json and reading pages.
+// Runs on Netlify at every deploy: turns CMS content into data.json, reading pages and your site text.
 const fs=require('fs'),path=require('path');
 const SITE=(process.env.URL||'https://YOUR-SITE.netlify.app').replace(/\/$/,'');
 const rd=d=>fs.existsSync(d)?fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>({slug:f.slice(0,-5),...JSON.parse(fs.readFileSync(path.join(d,f),'utf8'))})):[];
@@ -15,5 +15,26 @@ posts.forEach(p=>{
   fs.writeFileSync(path.join(dir,'index.html'),`<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(p.title)} | Ruhi Rules</title><meta name="description" content="${esc((p.body||'').slice(0,150))}"><meta property="og:title" content="${esc(p.title)}"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet"><style>body{margin:0;background:#fff;color:#2a1018;font:21px/1.8 Fraunces,Georgia,serif}main{max-width:620px;margin:0 auto;padding:56px 24px 96px}a{color:#6b1630}h1{font-weight:300;color:#6b1630;font-size:2.6rem;line-height:1.1}small{color:#6b1630;font-family:system-ui,sans-serif}.share a{margin-right:16px;font:600 15px system-ui,sans-serif}</style></head><body><main><a href="/#writing" style="font:600 15px system-ui">Back to Ruhi Rules</a><p><small>${esc(p.category)} &middot; ${date} &middot; ${mins} min read</small></p><h1>${esc(p.title)}</h1>${fmt(p.body)}<p class="share"><a href="https://wa.me/?text=${encodeURIComponent(p.title+' '+url)}">Share on WhatsApp</a><a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}">Share on X</a></p></main></body></html>`);
 });
 fs.writeFileSync('data.json',JSON.stringify({posts:posts.map(({body,...r})=>({...r,excerpt:(body||'').replace(/[*_#]/g,'').slice(0,140),html:fmt(body)})),books,thoughts:settings.thoughts||[],payment_note:settings.payment_note||''}));
+const S=settings,H=S.home||{},C=S.contact||{},SV=S.services||{},SE=S.seo||{};
+const pt=x=>typeof x==='string'?x:(x&&(x.t||x.point))||'';
+let h=fs.readFileSync('index.html','utf8');
+const sub=(re,fn)=>{h=h.replace(re,fn)};
+if(H.hero_tag)sub(/<p class="tag">[\s\S]*?<\/p>/,()=>'<p class="tag">'+esc(H.hero_tag)+'</p>');
+if(H.hero_first)sub(/<h1>[\s\S]*?<\/h1>/,()=>'<h1>'+esc(H.hero_first)+'<span>'+esc(H.hero_second)+'</span></h1>');
+if(H.hero_lead)sub(/<p class="lead">[\s\S]*?<\/p>/,()=>'<p class="lead">'+esc(H.hero_lead)+'</p>');
+if(H.writing_title)sub(/<h2>The Writing Room<\/h2><p>[\s\S]*?<\/p>/,()=>'<h2>'+esc(H.writing_title)+'</h2><p>'+esc(H.writing_intro)+'</p>');
+if(H.shelf_title)sub(/<h2>The Bookshelf<\/h2><p>[\s\S]*?<\/p>/,()=>'<h2>'+esc(H.shelf_title)+'</h2><p>'+esc(H.shelf_intro)+'</p>');
+if(S.about)sub(/(<section class="about" id="about"><div class="wrap">)[\s\S]*?(<\/div><\/section>)/,(m,a,z)=>a+'<h2>About Ruhi Rules</h2>'+fmt(S.about)+z);
+if(SV.items&&SV.items.length)sub(/<section id="services">[\s\S]*?<\/section>/,()=>'<section id="services"><div class="wrap"><h2>'+esc(SV.title||'Services')+'</h2><p>'+esc(SV.intro)+'</p><div class="svc">'+SV.items.map(i=>'<article><h3>'+esc(i.title)+'</h3><ul>'+(i.points||[]).map(x=>'<li>'+esc(pt(x))+'</li>').join('')+'</ul><a class="btn alt" href="mailto:ruhirules99@gmail.com?subject='+encodeURIComponent(i.subject||i.title+' enquiry')+'">Enquire</a></article>').join('')+'</div></div></section>');
+if(C.title)sub(/<h2>Let[^<]*<\/h2>/,()=>'<h2>'+esc(C.title)+'</h2>');
+if(C.intro)sub(/<p>Quotations, collaborations[\s\S]*?<\/p>/,()=>'<p>'+esc(C.intro)+'</p>');
+if(C.email)h=h.split('ruhirules99@gmail.com').join(C.email.trim());
+if(C.whatsapp)h=h.split('31618849148').join(String(C.whatsapp).replace(/\D/g,''));
+if(C.phone)h=h.split('+31 6 18849148').join(esc(C.phone));
+if(H.footer_tagline)sub(/<span>Words\. Ideas\. Creativity\. Digital possibilities\.<\/span><\/div><\/footer>/,()=>'<span>'+esc(H.footer_tagline)+'</span></div></footer>');
+if(S.socials&&S.socials.length)sub(/<\/div><\/footer>/,()=>'<span>'+S.socials.filter(x=>x.url).map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="margin-right:14px">'+esc(x.name)+'</a>').join('')+'</span></div></footer>');
+if(SE.title)sub(/<title>[\s\S]*?<\/title>/,()=>'<title>'+esc(SE.title)+'</title>');
+if(SE.description)sub(/<meta name="description" content="[^"]*">/,()=>'<meta name="description" content="'+esc(SE.description)+'">');
+fs.writeFileSync('index.html',h);
 fs.writeFileSync('sitemap.xml','<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>'+SITE+'/</loc></url>'+posts.map(p=>`<url><loc>${SITE}/writing/${p.slug}/</loc></url>`).join('')+'</urlset>');
 fs.writeFileSync('robots.txt','User-agent: *\nDisallow: /admin/\nSitemap: '+SITE+'/sitemap.xml\n');
