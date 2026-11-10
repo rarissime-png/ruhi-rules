@@ -1,1 +1,79 @@
-{"about":"I am a multidisciplinary digital professional with a love for creative writing, poetry and digital innovation. I help individuals and businesses build their online presence, and I write because some things can only be said in verse.","thoughts":["Not every thought needs an audience, but the good ones deserve a page.","Build slowly, say it plainly, and let the work speak.","Some ideas arrive as poems. Others arrive as plans. Write both down.","A blank page is not empty. It is waiting."],"payment_note":"Message me on WhatsApp to order. I will send payment details and your download link once payment is confirmed.","home":{"hero_tag":"I write. I create. I build. I manage. I market.","hero_first":"Ruhi","hero_second":"Rules","hero_lead":"A creative space where words find expression, ideas take shape and digital possibilities become reality. Poetry and storytelling on one side, digital solutions on the other.","writing_title":"The Writing Room","writing_intro":"Poems, reflections and short prose. Tap Read the full piece to open any of them.","shelf_title":"The Bookshelf","shelf_intro":"Poetry collections and e-books, delivered digitally after purchase.","footer_tagline":"Words. Ideas. Creativity. Digital possibilities."},"services":{"title":"Services","intro":"Multidisciplinary digital support for individuals and businesses.","items":[{"title":"Social media management","points":["Strategy and content planning","Content creation","Account management","Audience engagement"],"subject":"Social media management enquiry"},{"title":"Web design and development","points":["Business websites","Personal portfolios","Landing pages","Website maintenance"],"subject":"Web design enquiry"},{"title":"Virtual assistance","points":["Administrative support","Email management","Research and scheduling","Data entry"],"subject":"Virtual assistance enquiry"},{"title":"Digital marketing","points":["Marketing strategy","Content marketing","Campaigns","Online brand visibility"],"subject":"Digital marketing enquiry"}]},"contact":{"title":"Let’s build something meaningful.","intro":"Quotations, collaborations and professional engagements are all welcome.","email":"ruhirules99@gmail.com","phone":"+31 6 18849148","whatsapp":"31618849148"},"socials":[],"seo":{"title":"Ruhi Rules | Poetry, E-books and Digital Services","description":"Ruhi Rules is a creative and professional brand: poetry and writing, poetry e-books, and digital services including social media, web design, virtual assistance and marketing."}}
+{
+  "about": "I am a multidisciplinary digital professional with a passion for creative writing, poetry and digital innovation. I work at the intersection of creativity and technology, helping individuals and businesses build meaningful digital experiences and establish their online presence.\n\nBeyond the digital space, I am a writer, an observer of life and a curious mind fascinated by human experiences, relationships, identity and the beautiful contradictions that make us who we are.\n\nI write because some things are too complex for ordinary conversations, too personal for casual explanations and too deeply felt to remain unspoken. Poetry gives them somewhere to live.\n\nRuhi Rules is where these two worlds meet: creativity, expression and digital possibility.\n\nProfessionally driven. Creatively restless. Unapologetically expressive.\n\nWelcome to my world.",
+  "thoughts": [
+    "Not every thought needs an audience, but the good ones deserve a page.",
+    "Build slowly, say it plainly, and let the work speak.",
+    "Some ideas arrive as poems. Others arrive as plans. Write both down.",
+    "A blank page is not empty. It is waiting."
+  ],
+  "payment_note": "Message me on WhatsApp to order. I will send payment details and your download link once payment is confirmed.",
+  "home": {
+    "hero_lead": "A creative space where words find expression, ideas take shape and digital possibilities become reality. Poetry and storytelling on one side, digital solutions on the other.",
+    "shelf_title": "The Bookshelf",
+    "writing_intro": "Poems, reflections and short prose. Tap Read the full piece to open any of them.",
+    "footer_tagline": "Words. Ideas. Creativity. Digital possibilities.",
+    "hero_first": "Ruhi",
+    "writing_title": "The Writing Room",
+    "hero_tag": "I write. I create. I build. I manage. I market.",
+    "shelf_intro": "Poetry collections and e-books, delivered digitally after purchase.",
+    "hero_second": "Rules"
+  },
+  "services": {
+    "title": "Services",
+    "intro": "Multidisciplinary digital support for individuals and businesses.",
+    "items": [
+      {
+        "title": "Social media management",
+        "points": [
+          "Strategy and content planning",
+          "Content creation",
+          "Account management",
+          "Audience engagement"
+        ],
+        "subject": "Social media management enquiry"
+      },
+      {
+        "title": "Web design and development",
+        "points": [
+          "Business websites",
+          "Personal portfolios",
+          "Landing pages",
+          "Website maintenance"
+        ],
+        "subject": "Web design enquiry"
+      },
+      {
+        "title": "Virtual assistance",
+        "points": [
+          "Administrative support",
+          "Email management",
+          "Research and scheduling",
+          "Data entry"
+        ],
+        "subject": "Virtual assistance enquiry"
+      },
+      {
+        "title": "Digital marketing",
+        "points": [
+          "Marketing strategy",
+          "Content marketing",
+          "Campaigns",
+          "Online brand visibility"
+        ],
+        "subject": "Digital marketing enquiry"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let’s build something meaningful.",
+    "intro": "Quotations, collaborations and professional engagements are all welcome.",
+    "email": "ruhirules99@gmail.com",
+    "phone": "+31 6 18849148",
+    "whatsapp": "31618849148"
+  },
+  "socials": [],
+  "seo": {
+    "title": "Ruhi Rules | Poetry, E-books and Digital Services",
+    "description": "Ruhi Rules is a creative and professional brand: poetry and writing, poetry e-books, and digital services including social media, web design, virtual assistance and marketing."
+  }
+}
