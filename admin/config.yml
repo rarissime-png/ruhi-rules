@@ -27,12 +27,22 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: Title, name: title, widget: string}
+      - {label: Subtitle, name: subtitle, widget: string, required: false}
+      - {label: Author, name: author, widget: string, default: Ruhi Rules, required: false}
       - {label: Cover, name: cover, widget: image, required: false}
-      - {label: Description, name: description, widget: text}
-      - {label: Price (for example GHS 50 or USD 5), name: price, widget: string}
-      - {label: Buy link (Selar or other checkout page), name: buy_link, widget: string, required: false}
-      - {label: International buy link (Payhip or Gumroad, optional), name: intl_link, widget: string, required: false}
-      - {label: Status, name: status, widget: select, options: [Available, Upcoming]}
+      - {label: Short description (shown on the book card), name: description, widget: text}
+      - {label: Full description (shown on the book page), name: full_description, widget: markdown, required: false}
+      - {label: Genre or category (for example Poetry), name: genre, widget: string, required: false}
+      - {label: Number of pages, name: pages, widget: string, required: false}
+      - {label: Publication date, name: pub_date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: Currency, name: currency, widget: select, options: [GHS, USD, EUR], required: false}
+      - {label: Price (numbers only, for example 50), name: price, widget: string, required: false}
+      - {label: Selar checkout link (must start with https://), name: buy_link, widget: string, required: false}
+      - {label: Second checkout link for another currency (optional), name: intl_link, widget: string, required: false}
+      - {label: Price shown for the second link (for example USD 5), name: intl_price, widget: string, required: false}
+      - {label: Free sample PDF (optional), name: sample, widget: file, required: false}
+      - {label: Show in Featured, name: featured, widget: boolean, default: false, required: false}
+      - {label: Status (Hidden = not shown on the site), name: status, widget: select, options: [Hidden, Available, Upcoming], default: Hidden}
   - name: settings
     label: Website content
     files:
