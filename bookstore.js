@@ -10,8 +10,13 @@ const ok=u=>/^https:\/\/[^\s"'<>]+$/i.test(String(u||'').trim());
 const rj=f=>fs.existsSync(f)?JSON.parse(fs.readFileSync(f,'utf8')):{};
 const all=fs.existsSync('content/books')?fs.readdirSync('content/books').filter(f=>f.endsWith('.json')).map(f=>({slug:f.slice(0,-5),...rj('content/books/'+f)})):[];
 const S=rj('content/settings.json'),H=S.home||{};
-const vis=all.filter(b=>b.title&&(b.status==='Available'||b.status==='Upcoming'));
-const st=b=>b.status==='Upcoming'?'soon':(ok(b.buy_link)?'buy':'none');
+
+// CORRECTED: Include books with all three statuses.
+const vis=all.filter(b=>b.title&&['Available','Upcoming','Not yet available'].includes(b.status));
+
+// CORRECTED: Only books marked Available with a valid purchase link can be purchased.
+const st=b=>b.status==='Upcoming'?'soon':(b.status==='Available'&&ok(b.buy_link)?'buy':'none');
+
 const lab={buy:'Available',soon:'Coming soon',none:'Not yet available'};
 const price=b=>{const p=String(b.price||'').trim();if(!p)return'';return b.currency&&/^[\d.,\s]+$/.test(p)?b.currency+' '+p:p;};
 const when=b=>b.pub_date?new Date(b.pub_date).toLocaleDateString('en-GB',{month:'long',year:'numeric'}):'';
@@ -41,4 +46,3 @@ vis.forEach(b=>{fs.mkdirSync('books/'+b.slug,{recursive:true});fs.writeFileSync(
 if(SITE&&vis.length&&fs.existsSync('sitemap.xml')){const sm=fs.readFileSync('sitemap.xml','utf8');fs.writeFileSync('sitemap.xml',sm.replace('</urlset>',vis.map(b=>`<url><loc>${SITE}/books/${b.slug}/</loc></url>`).join('')+'</urlset>'));}
 console.log('Bookstore built:',vis.length,'visible book(s)');
 }
-
